@@ -7,10 +7,12 @@ import {
   deleteUserById,
   patchUser,
   putUser,
+  getYoungestUser,
 } from "../controllers/usersController.js";
 
 const router = express.Router();
 
+router.get("/youngest", getYoungestUser);
 router.get("/", getUsers);
 router.get("/:id", getUserById);
 router.post("/", postUser);

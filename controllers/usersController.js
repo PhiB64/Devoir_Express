@@ -78,5 +78,24 @@ const patchUser = function (req, res) {
 
   res.json(user);
 };
+const getYoungestUser = function (req, res) {
+  if (!users || users.length === 0) {
+    return res.status(404).json({ error: "Aucun utilisateur disponible" });
+  }
 
-export { getUsers, getUserById, postUser, deleteUserById, patchUser, putUser };
+  const minAge = Math.min(...users.map((u) => u.age));
+
+  const youngest = users.filter((u) => u.age === minAge);
+
+  res.json(youngest);
+};
+
+export {
+  getUsers,
+  getUserById,
+  postUser,
+  deleteUserById,
+  patchUser,
+  putUser,
+  getYoungestUser,
+};
