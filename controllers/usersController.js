@@ -90,6 +90,29 @@ const getYoungestUser = function (req, res) {
   res.json(youngest);
 };
 
+const searchUserByName = (req, res) => {
+  const search = req.query.name?.toLowerCase();
+
+  if (!search) {
+    return res.status(400).json({ error: "Paramètre 'name' requis" });
+  }
+
+  const results = users.filter((u) => u.name.toLowerCase().includes(search));
+
+  res.json(results);
+};
+
+const getAverageAge = (req, res) => {
+  if (!users.length) {
+    return res.status(400).json({ error: "Aucun utilisateur trouvé" });
+  }
+
+  const totalAge = users.reduce((sum, user) => sum + user.age, 0);
+  const average = totalAge / users.length;
+
+  res.json(average);
+};
+
 export {
   getUsers,
   getUserById,
@@ -98,4 +121,6 @@ export {
   patchUser,
   putUser,
   getYoungestUser,
+  searchUserByName,
+  getAverageAge,
 };
