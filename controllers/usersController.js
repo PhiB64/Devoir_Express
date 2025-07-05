@@ -1,17 +1,22 @@
+//#region users
 let users = [
   {
     id: 1,
     name: "Philippe BARBOSA",
     age: 54,
     role: "Développeur",
+    email: "philippe@gmail.com",
   },
   {
     id: 2,
     name: "Lucas BALLU",
     age: 20,
     role: "Intégrateur",
+    email: "lucas@outlook.com",
   },
 ];
+
+//#endregion
 
 const getUsers = (req, res) =>
   users?.length
@@ -113,6 +118,30 @@ const getAverageAge = (req, res) => {
   res.json(average);
 };
 
+const sortUsers = (req, res) => {
+  const { sortBy } = req.body;
+
+  if (!["name", "age"].includes(sortBy)) {
+    return res.status(400).json({ error: "Paramètre 'sortBy' invalide" });
+  }
+
+  const sorted = [...users].sort((a, b) =>
+    sortBy === "name" ? a.name.localeCompare(b.name) : a.age - b.age
+  );
+
+  res.json(sorted);
+};
+
+const getUsersByDomain = (req, res) => {
+  const domain = req.params.domain.toLowerCase();
+
+  const matches = users.filter((u) =>
+    u.email?.toLowerCase().endsWith(`@${domain}`)
+  );
+
+  res.json(matches);
+};
+
 export {
   getUsers,
   getUserById,
@@ -123,4 +152,6 @@ export {
   getYoungestUser,
   searchUserByName,
   getAverageAge,
+  sortUsers,
+  getUsersByDomain,
 };

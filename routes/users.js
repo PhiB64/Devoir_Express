@@ -10,10 +10,14 @@ import {
   getYoungestUser,
   searchUserByName,
   getAverageAge,
+  sortUsers,
+  getUsersByDomain,
 } from "../controllers/usersController.js";
 
 const router = express.Router();
 
+router.get("/:domain", getUsersByDomain);
+router.post("/sort", sortUsers);
 router.get("/average", getAverageAge);
 router.get("/search", searchUserByName);
 router.get("/youngest", getYoungestUser);
