@@ -3,14 +3,12 @@ let users = [
     id: 1,
     name: "Philippe BARBOSA",
     age: 54,
-    role: "Développeur",
     email: "philippe@gmail.com",
   },
   {
     id: 2,
     name: "Lucas BALLU",
     age: 20,
-    role: "Intégrateur",
     email: "lucas@outlook.com",
   },
 ];
