@@ -71,7 +71,7 @@ const getByDomain = (domain) => {
   return users.filter((u) => u.email?.toLowerCase().endsWith(`@${domain}`));
 };
 
-export {
+export default {
   getAll,
   getById,
   create,
